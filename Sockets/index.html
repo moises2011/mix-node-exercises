@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <script type="text/javascript">
+        var socket;
+            socket = io.connect();
+            socket.on('timer', data => {
+                document.getElementById("timer").innerText = data;
+            });
+        function submitData(){
+            var data = document.getElementById('inputdata').value;
+            socket.emit('submit', data);
+        }
+    </script>
+</head>
+<body>
+    <h1>Hi sockets.io!!</h1>
+    <p>Timer: <span id="timer"></span></p>
+    <form action="#">
+        <p>Data:
+            <input type="text" id="inputdata"/>
+            <input type="button" onclick="submitData()" value="Send"/>    
+        </p>
+    </form>
+</body>
+</html>
